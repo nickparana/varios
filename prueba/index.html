@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+	<title>Comparar 2 Textos</title>
+	<script src="angular.js"></script>
+    <script src="texto-module.js"></script>
+	<script src="texto-controller.js"></script>
+	<script src="texto-service.js"></script>
+	<script src="texto-filter.js"></script>
+	<script src="angular-sanitize.js"></script>
+	<script src="angular-route.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	
+	
+    <div ng-controller="MyController as vm">
+    <p>Texto 1</p>
+	<textarea rows="4" cols="50" placeholder="Ingrese texto n° 1" ng-model="vm.texto1">
+	</textarea>
+	
+	<p>Texto 2</p>
+	<textarea rows="4" cols="50" placeholder="Ingrese texto n° 2" ng-model="vm.texto2">
+	</textarea>
+	
+	<div>
+	<input type="button" ng-click="vm.CheckRepetidos(vm.texto1,vm.texto2)" value="click">
+	<input type="button" ng-click="vm.EliminarRepetidos()" value="eliminar repetidos">
+	<input type="button" value="esconder listados" ng-click="mostrar=true">
+	<input type="button" value="get url" ng-click="vm.GetURL()">
+	</div>
+		
+	<ul ng-repeat="s in vm.a">
+		<li>{{s.snippet}}</li>	
+	</ul>
+	
+	<p class="recuadro" ng-bind-html="vm.texto1 | highlight:vm.repetidos">
+	{{vm.texto1 | highlight:vm.repetidos}}
+	</p>
+	
+	<p class="recuadro" ng-bind-html="vm.texto2 | highlight:vm.repetidos">
+	{{vm.texto2 | highlight:vm.repetidos}}
+	</p>	
+	
+	<section ng-init="mostrar=false" ng-show="mostrar">
+	<p>Texto 1</p>
+	<ul ng-repeat="t in vm.array1 track by $index">
+	<li>{{t}}</li>	
+	</ul>	
+	<p>Texto 2</p>
+	<ul ng-repeat="t in vm.array2 track by $index">
+	<li>{{t}}</li>	
+	</ul>
+	</section>
+	
+	<section>	
+	<p>Repetidos</p>
+	<ul ng-repeat="t in vm.repetidos track by $index">
+	<li>{{t}}</li>	
+	</ul>
+	</section>	
+	</div>
+   
+</body>
+</html>
